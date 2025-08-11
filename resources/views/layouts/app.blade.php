@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Case Mark System')</title>
+    <title>@yield('title', 'Store & Pull Parts System')</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('sanoh-favicon.png') }}?v=1">
@@ -183,33 +183,55 @@
 
             <!-- Navigation Menu -->
             <nav class="space-y-1 p-4">
-                <a href="{{ route('casemark.content-list') }}"
-                    class="flex items-center px-4 py-2 text-sm font-medium rounded-md 
-                          {{ request()->routeIs('casemark.content-list') ? 'bg-blue-900 text-white' : 'text-gray-700 hover:bg-gray-50' }}">
-                    <i class="fas fa-list mr-3"></i>
-                    CASE MARK
-                </a>
+                <!-- Store System Section -->
+                <div class="mb-4">
+                    <h3 class="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                        STORE SYSTEM
+                    </h3>
+                    <div class="space-y-1 mt-2">
+                        <a href="{{ route('store.index') }}"
+                            class="flex items-center px-4 py-2 text-sm font-medium rounded-md 
+                                  {{ request()->routeIs('store.index') ? 'bg-blue-900 text-white' : 'text-gray-700 hover:bg-gray-50' }}">
+                            <i class="fas fa-home mr-3"></i>
+                            Dashboard Store
+                        </a>
 
-                <a href="{{ route('casemark.history') }}"
-                    class="flex items-center px-4 py-2 text-sm font-medium rounded-md
-                          {{ request()->routeIs('casemark.history') ? 'bg-blue-900 text-white' : 'text-gray-700 hover:bg-gray-50' }}">
-                    <i class="fas fa-history mr-3"></i>
-                    HISTORY
-                </a>
+                        <a href="{{ route('store.dashboard') }}"
+                            class="flex items-center px-4 py-2 text-sm font-medium rounded-md 
+                                  {{ request()->routeIs('store.dashboard') ? 'bg-blue-900 text-white' : 'text-gray-700 hover:bg-gray-50' }}">
+                            <i class="fas fa-box mr-3"></i>
+                            Posting F/G
+                        </a>
 
-                <a href="{{ route('casemark.upload') }}"
-                    class="flex items-center px-4 py-2 text-sm font-medium rounded-md
-                          {{ request()->routeIs('casemark.upload') ? 'bg-blue-900 text-white' : 'text-gray-700 hover:bg-gray-50' }}">
-                    <i class="fas fa-upload mr-3"></i>
-                    UPLOAD
-                </a>
+                        <a href="{{ route('store.scan-container') }}"
+                            class="flex items-center px-4 py-2 text-sm font-medium rounded-md
+                                  {{ request()->routeIs('store.scan-container') ? 'bg-blue-900 text-white' : 'text-gray-700 hover:bg-gray-50' }}">
+                            <i class="fas fa-shipping-fast mr-3"></i>
+                            Scan Container
+                        </a>
 
-                <a href="{{ route('casemark.list') }}"
-                    class="flex items-center px-4 py-2 text-sm font-medium rounded-md
-                          {{ request()->routeIs('casemark.list') ? 'bg-blue-900 text-white' : 'text-gray-700 hover:bg-gray-50' }}">
-                    <i class="fas fa-clipboard-list mr-3"></i>
-                    LIST CASE MARK
-                </a>
+                        <a href="{{ route('store.scan-box') }}"
+                            class="flex items-center px-4 py-2 text-sm font-medium rounded-md
+                                  {{ request()->routeIs('store.scan-box') ? 'bg-blue-900 text-white' : 'text-gray-700 hover:bg-gray-50' }}">
+                            <i class="fas fa-boxes mr-3"></i>
+                            Scan Box
+                        </a>
+
+                        <a href="{{ route('store.history') }}"
+                            class="flex items-center px-4 py-2 text-sm font-medium rounded-md
+                                  {{ request()->routeIs('store.history') ? 'bg-blue-900 text-white' : 'text-gray-700 hover:bg-gray-50' }}">
+                            <i class="fas fa-history mr-3"></i>
+                            Store History
+                        </a>
+
+                        <a href="{{ route('store.settings') }}"
+                            class="flex items-center px-4 py-2 text-sm font-medium rounded-md
+                                  {{ request()->routeIs('store.settings') ? 'bg-blue-900 text-white' : 'text-gray-700 hover:bg-gray-50' }}">
+                            <i class="fas fa-cog mr-3"></i>
+                            Store Settings
+                        </a>
+                    </div>
+                </div>
             </nav>
         </div>
     </div>

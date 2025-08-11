@@ -1,39 +1,43 @@
 <?php
 // routes/web.php
-use App\Http\Controllers\CaseMarkController;
+use App\Http\Controllers\StoreController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MenuController;
 use Illuminate\Support\Facades\Route;
 
+// Authentication Routes
+Route::get('/login', [AuthController::class, 'showLogin'])->name('auth.login');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Main Menu Route
+Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
+
+// Store System Routes
+Route::prefix('store')->name('store.')->group(function () {
+    
+    // Index/Welcome Page
+    Route::get('/', [StoreController::class, 'index'])->name('index');
+    
+    // Scan Slot (QR Slot)
+    Route::get('/scan-slot', [StoreController::class, 'scanSlot'])->name('scan-slot');
+
+    // Scan Box
+    Route::get('/scan-box', [StoreController::class, 'scanBox'])->name('scan-box');
+
+    // API endpoints for store operations
+    Route::post('/scan-slot', [StoreController::class, 'processSlotScan'])->name('scan.slot.process');
+    Route::post('/scan-box', [StoreController::class, 'processBoxScan'])->name('scan.box.process');
+});
+
+// Pull System Routes
+Route::prefix('pull')->name('pull.')->group(function () {
+    Route::get('/', function () {
+        return view('pull.index');
+    })->name('index');
+});
+
+// Default redirect to login
 Route::get('/', function () {
-    return redirect('/casemark');
-});
-
-// Case Mark Routes
-Route::prefix('casemark')->name('casemark.')->group(function () {
-
-    // Dashboard
-    Route::get('/', [CaseMarkController::class, 'contentList'])->name('content-list');
-
-    // Content List
-    Route::get('/content-list/{case_no?}', [CaseMarkController::class, 'contentList'])->name('content-list');
-
-    // History
-    Route::get('/history', [CaseMarkController::class, 'history'])->name('history');
-    Route::get('/history/{case_no}', [CaseMarkController::class, 'historyDetail'])->name('history.detail');
-
-    // Upload Excel
-    Route::get('/upload', [CaseMarkController::class, 'upload'])->name('upload');
-    Route::post('/upload', [CaseMarkController::class, 'uploadExcel'])->name('upload.excel');
-
-    // List Case Mark
-    Route::get('/list', [CaseMarkController::class, 'listCaseMark'])->name('list');
-    Route::get('/list/{case_no}', [CaseMarkController::class, 'listCaseMarkDetail'])->name('list.detail');
-
-    Route::post('/scan', [CaseMarkController::class, 'processScan'])->name('scan.process');
-    Route::post('/mark-packed', [CaseMarkController::class, 'markAsPacked'])->name('mark.packed');
-});
-
-// API Routes for AJAX calls
-Route::prefix('api/casemark')->name('api.casemark.')->group(function () {
-    Route::post('/scan', [CaseMarkController::class, 'processScan'])->name('scan');
-    Route::post('/mark-packed', [CaseMarkController::class, 'markAsPacked'])->name('mark.packed');
+    return redirect()->route('auth.login');
 });
